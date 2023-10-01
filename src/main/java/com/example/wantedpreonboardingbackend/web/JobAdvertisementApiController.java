@@ -13,7 +13,7 @@ public class JobAdvertisementApiController {
 
     private final JobAdvertisementService jobAdvertisementService;
 
-    @PostMapping("/api/v1/jobadvertisements")
+    @PostMapping("/api/v1/job-advertisements")
     public Long save(@RequestBody JobAdvertisementSaveRequestDto requestDto) {
         return jobAdvertisementService.save(requestDto);
     }
