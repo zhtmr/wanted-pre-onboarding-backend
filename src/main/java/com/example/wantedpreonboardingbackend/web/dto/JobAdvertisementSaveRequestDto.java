@@ -1,5 +1,6 @@
 package com.example.wantedpreonboardingbackend.web.dto;
 
+import com.example.wantedpreonboardingbackend.domain.company.Company;
 import com.example.wantedpreonboardingbackend.domain.jobadvertisement.JobAdvertisement;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,28 +10,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobAdvertisementSaveRequestDto {
 
-    private String 채용포지션;
+    private String position;
 
-    private Integer 채용보상금;
+    private Integer reward;
 
-    private String 채용내용;
+    private String content;
 
-    private String 사용기술;
+    private String skill;
+
+    private String nation;
+
+    private String region;
+
 
     @Builder
-    public JobAdvertisementSaveRequestDto(String 채용포지션, Integer 채용보상금, String 채용내용, String 사용기술) {
-        this.채용포지션 = 채용포지션;
-        this.채용보상금 = 채용보상금;
-        this.채용내용 = 채용내용;
-        this.사용기술 = 사용기술;
+    public JobAdvertisementSaveRequestDto(String position, Integer reward, String content, String skill, String nation, String region) {
+        this.position = position;
+        this.reward = reward;
+        this.skill = skill;
+        this.content = content;
+        this.nation = nation;
+        this.region = region;
     }
 
-    public JobAdvertisement toEntity() {
+    public JobAdvertisement toEntity(Company company) {
         return JobAdvertisement.builder()
-                .채용포지션(채용포지션)
-                .채용보상금(채용보상금)
-                .채용내용(채용내용)
-                .사용기술(사용기술)
+                .position(position)
+                .reward(reward)
+                .content(content)
+                .skill(skill)
+                .nation(nation)
+                .region(region)
+                .company(company)
                 .build();
     }
 }
