@@ -1,14 +1,14 @@
 package com.example.wantedpreonboardingbackend.domain.company;
 
 
+import com.example.wantedpreonboardingbackend.domain.jobadvertisement.JobAdvertisement;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -17,19 +17,22 @@ public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long 회사_id;
+    private Long Id;
 
-    private String 회사명;
+    private String name;
 
-    private String 국가;
+    @OneToMany(mappedBy = "company")
+    private List<JobAdvertisement> jobAdvertisements = new ArrayList<>();
 
-    private String 지역;
+    public void addJobAdvertisement(JobAdvertisement jobAdvertisement) {
+        jobAdvertisements.add(jobAdvertisement);
+        jobAdvertisement.setCompany(this);
+    }
 
     @Builder
-    public Company(String 회사명, String 국가, String 지역) {
-        this.회사명 = 회사명;
-        this.지역 = 지역;
-        this.국가 = 국가;
+    public Company(String name, List<JobAdvertisement> jobAdvertisements) {
+        this.name = name;
+        this.jobAdvertisements = jobAdvertisements;
     }
 
 }

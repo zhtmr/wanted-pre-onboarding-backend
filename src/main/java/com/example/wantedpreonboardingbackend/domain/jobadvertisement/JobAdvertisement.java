@@ -1,10 +1,15 @@
 package com.example.wantedpreonboardingbackend.domain.jobadvertisement;
 
+import com.example.wantedpreonboardingbackend.domain.company.Company;
+import com.example.wantedpreonboardingbackend.domain.user.User;
+import com.example.wantedpreonboardingbackend.web.dto.JobAdvertisementUpdateRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -13,21 +18,59 @@ public class JobAdvertisement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long 채용공고_id;
+    private Long Id;
 
-    private String 채용포지션;
+    private String position;
 
-    private Integer 채용보상금;
+    private Integer reward;
 
-    private String 채용내용;
+    private String content;
 
-    private String 사용기술;
+    private String skill;
+
+    private String nation;
+
+    private String region;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @OneToMany(mappedBy = "jobAdvertisement")
+    private List<User> users = new ArrayList<>();
+
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public void addUsers(User user) {
+        this.users.add(user);
+        user.setJobAdvertisement(this);
+    }
 
     @Builder
-    public JobAdvertisement(String 채용포지션, Integer 채용보상금, String 채용내용, String 사용기술) {
-        this.채용포지션 = 채용포지션;
-        this.채용보상금 = 채용보상금;
-        this.채용내용 = 채용내용;
-        this.사용기술 = 사용기술;
+    public JobAdvertisement(String position, Integer reward, String content, String skill, String nation, String region, Company company) {
+        this.position = position;
+        this.reward = reward;
+        this.content = content;
+        this.skill = skill;
+        this.nation = nation;
+        this.region = region;
+        this.company = company;
     }
+
+
+    public void update(JobAdvertisementUpdateRequestDto requestDto, Company company) {
+        this.position = requestDto.getPosition();
+        this.reward = requestDto.getReward();
+        this.content = requestDto.getContent();
+        this.skill = requestDto.getSkill();
+        this.nation = requestDto.getNation();
+        this.region = requestDto.getRegion();
+        this.company = company;
+    }
+
+
+
 }
