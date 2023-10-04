@@ -1,12 +1,10 @@
 package com.example.wantedpreonboardingbackend.domain.user;
 
+import com.example.wantedpreonboardingbackend.domain.jobadvertisement.JobAdvertisement;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -15,6 +13,15 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long 사용자_id;
+    private Long Id;
 
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_advertisement_id")
+    private JobAdvertisement jobAdvertisement;
+
+    public void setJobAdvertisement(JobAdvertisement jobAdvertisement) {
+        this.jobAdvertisement = jobAdvertisement;
+    }
 }
