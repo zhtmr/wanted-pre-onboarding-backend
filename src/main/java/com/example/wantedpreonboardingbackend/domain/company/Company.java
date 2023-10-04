@@ -21,7 +21,7 @@ public class Company {
 
     private String name;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<JobAdvertisement> jobAdvertisements = new ArrayList<>();
 
     public void addJobAdvertisement(JobAdvertisement jobAdvertisement) {

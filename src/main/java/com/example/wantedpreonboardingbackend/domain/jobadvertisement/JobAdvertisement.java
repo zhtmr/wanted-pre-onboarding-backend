@@ -32,11 +32,11 @@ public class JobAdvertisement {
 
     private String region;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany(mappedBy = "jobAdvertisement")
+    @OneToMany(mappedBy = "jobAdvertisement", cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
 

@@ -46,7 +46,7 @@ public class JobAdvertisementRepositoryTest {
                 .build());
 
         // when
-        List<JobAdvertisement> jobAdvertisements = repository.findAll();
+        List<JobAdvertisement> jobAdvertisements = repository.findAllDesc();
 
         // then
         JobAdvertisement jobAdvertisement = jobAdvertisements.get(0);

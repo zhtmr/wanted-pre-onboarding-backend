@@ -17,7 +17,7 @@ public class User {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "job_advertisement_id")
     private JobAdvertisement jobAdvertisement;
 
