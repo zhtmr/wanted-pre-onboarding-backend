@@ -43,10 +43,10 @@ public class JobAdvertisementApiControllerTest {
     @Autowired
     private CompanyRepository companyRepository;
 
-//    @After
-//    public void tearDown() {
-//        jobAdvertisementRepository.deleteAll();
-//    }
+    @After
+    public void tearDown() {
+        jobAdvertisementRepository.deleteAll();
+    }
 
     @Test
     public void JobAdvertisement_등록() {
