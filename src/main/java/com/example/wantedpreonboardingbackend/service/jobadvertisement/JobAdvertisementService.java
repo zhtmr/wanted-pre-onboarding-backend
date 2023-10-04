@@ -5,10 +5,7 @@ import com.example.wantedpreonboardingbackend.domain.company.CompanyRepository;
 import com.example.wantedpreonboardingbackend.domain.jobadvertisement.JobAdvertisement;
 import com.example.wantedpreonboardingbackend.domain.jobadvertisement.JobAdvertisementRepository;
 import com.example.wantedpreonboardingbackend.domain.user.UserRepository;
-import com.example.wantedpreonboardingbackend.web.dto.JobAdvertisementDeleteDto;
-import com.example.wantedpreonboardingbackend.web.dto.JobAdvertisementResponseDto;
-import com.example.wantedpreonboardingbackend.web.dto.JobAdvertisementSaveRequestDto;
-import com.example.wantedpreonboardingbackend.web.dto.JobAdvertisementUpdateRequestDto;
+import com.example.wantedpreonboardingbackend.web.dto.*;
 import com.example.wantedpreonboardingbackend.web.message.Result;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Service
@@ -28,8 +26,8 @@ public class JobAdvertisementService {
     @Transactional
     public Result<?> save(Long companyId, JobAdvertisementSaveRequestDto requestDto) {
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. companyId = " + companyId));
-        JobAdvertisement saved = jobAdvertisementRepository.save(requestDto.toEntity(company));
-        return new Result<>(new JobAdvertisementResponseDto(saved));
+        jobAdvertisementRepository.save(requestDto.toEntity(company));
+        return new Result<>().setMessage("채용공고가 등록되었습니다.");
     }
 
     // 수정
@@ -38,7 +36,7 @@ public class JobAdvertisementService {
         Company company = companyRepository.findById(companyId).orElseThrow(() -> new IllegalArgumentException("해당 회사가 없습니다. companyId = " + companyId));
         JobAdvertisement jobAdvertisement = jobAdvertisementRepository.findById(jobAdvertisementId).orElseThrow(() -> new IllegalArgumentException("해당 채용 공고가 없습니다. jobAdvertisementId = " + jobAdvertisementId));
         jobAdvertisement.update(requestDto, company);
-        return new Result<>(new JobAdvertisementResponseDto(jobAdvertisement));
+        return new Result<>().setMessage("채용공고가 수정되었습니다.");
     }
 
     // 삭제
@@ -50,15 +48,35 @@ public class JobAdvertisementService {
     }
 
 
-    // 전체 조회
+    // 전체 목록
     @Transactional
     public Result<?> findAllDesc() {
         List<JobAdvertisementResponseDto> list = jobAdvertisementRepository.findAllDesc().stream()
                 .map(JobAdvertisementResponseDto::new)
                 .collect(Collectors.toList());
-        return new Result<>(list);
+        return new Result<>(list).setMessage("채용공고 목록을 불러왔습니다.").setCount(list.size());
     }
 
 
+    // 검색
+    @Transactional
+    public Result<?> findJobAdvertisementByContentOrSkillContains(String keyword) {
+        List<JobAdvertisementResponseDto> list = jobAdvertisementRepository.findJobAdvertisementByContentOrSkillContains(keyword).stream()
+                .map(JobAdvertisementResponseDto::new)
+                .collect(Collectors.toList());
+        return new Result<>(list).setMessage("검색 결과 입니다.").setCount(list.size());
+    }
+
+
+    // 상세 보기
+    public Result<?> findJobAdvertisementByCompanyDetail(Long jobAdvertisementId) {
+        JobAdvertisement jobAdvertisement = jobAdvertisementRepository.findById(jobAdvertisementId).orElseThrow(() -> new IllegalArgumentException("채용 공고가 없습니다. jobAdvertisementId = " + jobAdvertisementId));
+        Long companyId = jobAdvertisement.getCompany().getId();
+
+        List<Long> list = jobAdvertisementRepository.findJobAdvertisementByCompanyDetail(companyId, jobAdvertisementId);
+        JobAdvertisementDetailResponseDto result = new JobAdvertisementDetailResponseDto(jobAdvertisement, list);
+
+        return new Result<>(result).setMessage("채용 상세 입니다.");
+    }
 
 }

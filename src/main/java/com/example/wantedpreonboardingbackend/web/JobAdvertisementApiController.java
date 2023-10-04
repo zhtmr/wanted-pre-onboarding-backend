@@ -49,5 +49,19 @@ public class JobAdvertisementApiController {
         return new ResponseEntity<Result<?>>(result, HttpStatus.OK);
     }
 
+    // 검색
+    @GetMapping("/search")
+    public ResponseEntity<?> search (@RequestParam String keyword) {
+        Result<?> result = jobAdvertisementService.findJobAdvertisementByContentOrSkillContains(keyword);
+        return new ResponseEntity<Result<?>>(result, HttpStatus.OK);
+    }
+
+    // 상세보기
+    @GetMapping("/detail/{jobAdvertisementId}")
+    public ResponseEntity<?> detail (@PathVariable Long jobAdvertisementId) {
+        Result<?> result = jobAdvertisementService.findJobAdvertisementByCompanyDetail(jobAdvertisementId);
+        return new ResponseEntity<Result<?>>(result, HttpStatus.OK);
+    }
+
 
 }
