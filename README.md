@@ -261,9 +261,9 @@
    3. api 테스트
       1. 요청
       ```http request
-       ### 지원
-       POST http://localhost:8080/api/v1/user/apply
-       Content-Type: application/json
+      ### 지원
+      POST http://localhost:8080/api/v1/user/apply
+      Content-Type: application/json
       
        {
          "userId" : 2,
