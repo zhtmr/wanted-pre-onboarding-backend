@@ -2,13 +2,14 @@
 
 ---
 - 특징
-  - api 응답은 ```Result<?>``` 사용해 응답 포멧 규격화
+  - api 응답은 ```Result<?>``` 객체를 사용해 응답 형식 규격화
   - 
 
 1. 채용공고 등록
    1. 요구사항 분석
    2. 구현과정
-      - ㅇ
+      - ```JobAdvertisementSaveRequestDto``` 로 요청받아 처리.
+      - ```toEntity()``` 메소드를 통해 엔티티 저장
    3. api 테스트
       1. 요청 
       ```http request
@@ -29,7 +30,7 @@
       ```http request
        {
          "message": "채용공고가 등록되었습니다.",
-         "count": null,
+         "count": null, //
          "result": null
        }
       ```
