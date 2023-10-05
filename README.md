@@ -108,8 +108,8 @@
       1. 사용자는 전체 채용 공고 목록을 볼 수 있다.
    2. 구현과정
       1. ```JobAdvertisementDefaultResponseDto``` 를 상속받은 ```JobAdvertisementResponseDto``` 로 요청받아 처리한다.
-      2. ```JobAdvertisementResponseDto``` 내부에 빌더를 구현하고 서비스 레이어에서 아래와 같이 메소드 참조로 사용함.
-      3. ![img.png](img.png)
+      2. ```JobAdvertisementResponseDto``` 내부에 빌더를 구현하고 서비스 레이어에서 아래와 같이 메소드 참조로 사용함.  
+       ![img.png](img.png)
    3. api 테스트
       1. 요청
       ```http request
@@ -164,7 +164,7 @@
    1. 요구사항 분석
       1. 검색 키워드를 받아와 처리한다.
    2. 구현과정
-      1. 회사이름이나 사용기술에 대해 키워드 검색을 한다.
+      1. 회사이름이나 사용기술에 대해 키워드 검색을 한다.  
       ![img_2.png](img_2.png)
    3. api 테스트
       1. 요청
@@ -219,7 +219,7 @@
       2. 해당 회사가 올린 다른 공고 추가 응답.
    2. 구현과정
       1. ```JobAdvertisementDefaultResponseDto``` 를 상속 받아 ```JobAdvertisementDetailResponseDto``` 에 필요한 필드 추가.
-      2. ![img_1.png](img_1.png)
+       ![img_1.png](img_1.png)
    3. api 테스트
       1. 요청
       ```http request
@@ -256,7 +256,7 @@
    1. 요구사항 분석
       1. 사용자는 해당 공고에 지원할 수 있다.
    2. 구현과정
-      1. 지원 후 db에 지원한 공고 id 추가됨.
+      1. 지원 후 db에 지원한 공고 id 추가됨.  
       ![img_3.png](img_3.png)
    3. api 테스트
       1. 요청
