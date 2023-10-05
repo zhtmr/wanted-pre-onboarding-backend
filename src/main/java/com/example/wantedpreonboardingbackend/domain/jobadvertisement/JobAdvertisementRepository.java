@@ -11,7 +11,7 @@ public interface JobAdvertisementRepository extends JpaRepository<JobAdvertiseme
     List<JobAdvertisement> findAllDesc();
 
     // 채용 공고 검색
-    @Query("SELECT j FROM JobAdvertisement j WHERE j.company.name LIKE CONCAT('%',:keyword,'%') OR j.skill LIKE CONCAT('%',:keyword,'%')")
+    @Query("SELECT j FROM JobAdvertisement j WHERE j.company.name LIKE CONCAT(:keyword,'%') OR j.skill LIKE CONCAT(:keyword,'%')")
     List<JobAdvertisement> findJobAdvertisementByContentOrSkillContains(@Param("keyword") String keyword);
 
     // 상세보기

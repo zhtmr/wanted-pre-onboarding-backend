@@ -39,14 +39,4 @@ public class JobAdvertisementUpdateRequestDto {
         this.region = region;
     }
 
-    public JobAdvertisement toEntity() {
-        return JobAdvertisement.builder()
-                .position(position)
-                .reward(reward)
-                .content(content)
-                .skill(skill)
-                .nation(nation)
-                .region(region)
-                .build();
-    }
 }
