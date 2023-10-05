@@ -18,9 +18,9 @@
    3. api 테스트
       1. 요청 
       ```http request
-       ### 등록
-       POST http://localhost:8080/api/v1/job-advertisements/4
-       Content-Type: application/json
+      ### 등록
+      POST http://localhost:8080/api/v1/job-advertisements/4
+      Content-Type: application/json
          
        {         
          "position":"백엔드 주니어 개발자",
@@ -52,9 +52,9 @@
    3. api 테스트
       1. 요청
       ```http request
-       ### 수정
-       PUT http://localhost:8080/api/v1/job-advertisements/3/75
-       Content-Type: application/json
+      ### 수정
+      PUT http://localhost:8080/api/v1/job-advertisements/3/75
+      Content-Type: application/json
       
        {
          "position":"백엔드 주니어 개발자",
@@ -84,9 +84,9 @@
    3. api 테스트
       1. 요청
       ```http request
-       ### 삭제
-       DELETE http://localhost:8080/api/v1/job-advertisements
-       Content-Type: application/json
+      ### 삭제
+      DELETE http://localhost:8080/api/v1/job-advertisements
+      Content-Type: application/json
       
        {
          "job_advertisement_id": 45
@@ -113,8 +113,8 @@
    3. api 테스트
       1. 요청
       ```http request
-       ### 목록보기
-       GET http://localhost:8080/api/v1/job-advertisements
+      ### 목록보기
+      GET http://localhost:8080/api/v1/job-advertisements
       ```
       2. 응답
       ```http request
@@ -169,8 +169,8 @@
    3. api 테스트
       1. 요청
       ```http request
-       ### 검색
-       GET http://localhost:8080/api/v1/job-advertisements/search?keyword=ja
+      ### 검색
+      GET http://localhost:8080/api/v1/job-advertisements/search?keyword=ja
       ```
       2. 응답
       ```http request
